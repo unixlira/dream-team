@@ -123,10 +123,10 @@ class PlayerTeamServices
         // Obter o número total de jogadores confirmados
         $totalConfirmedPlayers = Player::where('is_presence', true)->count();
 
-        // Obter todos os jogadores confirmados
-        $confirmedPlayers = Player::where('is_presence', true)->get();
+        // Obter todos os jogadores confirmados e classificá-los por habilidade
+        $confirmedPlayers = Player::where('is_presence', true)->orderBy('skill_level', 'desc')->get();
 
-        // Embaralhar aleatoriamente os jogadores
+        // Embaralhar aleatoriamente os jogadores classificados
         $shuffledPlayers = $confirmedPlayers->shuffle();
 
         // Inicialize um array para rastrear quantos goleiros já foram alocados em cada time
@@ -204,14 +204,5 @@ class PlayerTeamServices
 
         return redirect()->route('admin.player-team.index');
     }
-
-
-
-
-
-
-
-
-
 
 }
