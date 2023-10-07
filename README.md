@@ -41,6 +41,16 @@ Para utilizar esta função, você pode acessá-la através da interface do sist
 
 Lembre-se de que esta função é projetada para tornar a distribuição de jogadores em times o mais justa possível, seguindo regras específicas. Portanto, não se preocupe com os detalhes técnicos; basta usar e desfrutar!
 
+Sistema disponível em ambiente AWS utilizando serviços:
+
+- Route 53
+- EC2
+- RDS
+
+Disponível em 
+
+http://www.devlira.com.br
+
 ---
 
 
