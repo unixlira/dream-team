@@ -73,7 +73,7 @@
                         </button>
                     </div>
                     <div class="col-md-3 col-sm-12 mb-3">
-                        <a href="{{ route('admin.player-team.index') }}" class="btn btn-dark w-100"
+                        <a href="{{ route('admin.player-team.shuffle') }}" class="btn btn-dark w-100"
                            onclick="showLoader()">Gerar Jogadores&Times</a>
                     </div>
                     <div class="col-md-3 col-sm-12 mb-3">
