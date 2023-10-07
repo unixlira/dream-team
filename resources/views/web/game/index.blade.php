@@ -101,13 +101,15 @@
                                 <hr class="bg-dark rounded bg-dark w-50 mb-4 mt-4" style="height: 10px;">
                             </div>
                         @endforeach
-                    @else
-                        <div class="d-flex justify-content-center">
-                            <h1 class="text-dark">Nenhuma partida agendada</h1>
-                        </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
+    @if($gamesResource->count() < 1)
+        <div class="d-flex justify-content-center">
+            <h1 class="text-dark text-center">Nenhuma partida agendada</h1>
+        </div>
+
+    @endif
 @endsection

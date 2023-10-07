@@ -12,7 +12,7 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-4 cols-sm-12">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nome Completo</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ $player->name }}">
@@ -27,14 +27,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4 cols-sm-12">
                         <div class="mb-3">
                             <label for="skill_level" class="form-label">Nível de Habilidade</label>
                             <input type="number" class="form-control" id="skill_level" name="skill_level" max="5" min="1" value="{{ $player->skill_level }}">
                             <div id="skill_level" class="form-text">Insira um valor de 1 até 5</div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4 cols-sm-12">
                         <div class="mb-3">
                             <label for="is_goalkeeper" class="form-label">Goleiro</label>
                             <select class="form-select" aria-label="É goleiro" name="is_goalkeeper">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center mt-5 ">
+                <div class="d-flex justify-content-center mt-5 mb-5">
                     <a href="{{ route('admin.player.index') }}" class="btn btn-dark w-25 mx-2" onclick="showLoader()">Voltar</a>
                     <button type="submit" class="btn btn-info w-25 text-white mx-2" onclick="showLoader()">Atualizar</button>
                 </div>

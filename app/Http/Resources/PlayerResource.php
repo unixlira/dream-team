@@ -17,6 +17,8 @@ class PlayerResource extends JsonResource
             'is_presence'   => $this->is_presence,
             'created_at'    => $this->created_at,
             'updated_at'    => $this->updated_at,
+
+            'team'          =>  TeamResource::make($this->whenLoaded('team')),
         ];
     }
 }

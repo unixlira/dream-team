@@ -13,7 +13,7 @@
                     <img class="profile-image" src="https://unixlira.github.io/images/logo.png" alt="José Lira">
                     <span class="fw-bold">José Lira &nbsp;</span>
                     <span class="text-secondary">Última atualização: </span>
-                    <span class="fw-bold text-secondary">06/10/2023 as 17:00 pm </span>
+                    <span class="fw-bold text-secondary">07/10/2023 as 14:43 pm </span>
                 </p>
                 <p>Abaixo links do Sistema <i>"Jogadores, Times e Partidas"</i> do projeto Code Group para gerar
                     manualmente.</p>

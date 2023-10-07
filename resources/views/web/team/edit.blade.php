@@ -12,14 +12,14 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6 col-sm-12">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nome </label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ $team->name }}">
                             <div id="name" class="form-text">Insira o nome do time</div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-6 col-sm-12">
                         <div class="mb-3">
                             <label for="max_players" class="form-label">Número de Jogadores </label>
                             <input type="number" class="form-control" id="max_players" name="max_players" min="1" max="6" value="{{ $team->max_players }}">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center mt-5 ">
+                <div class="d-flex justify-content-center mt-5 mb-5">
                     <a href="{{ route('admin.team.index') }}" class="btn btn-dark w-25 mx-2" onclick="showLoader()">Voltar</a>
                     <button type="submit" class="btn btn-info w-25 text-white mx-2" onclick="showLoader()">Atualizar</button>
                 </div>

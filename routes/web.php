@@ -30,6 +30,14 @@ Route::prefix('admin')->group(function(){
              ]
          )->names('admin.game');
     Route::resource('player-team',PlayerTeamController::class)
+         ->only(
+             [
+                 'index',
+                 'store',
+                 'destroy',
+                 'shuffle'
+             ]
+         )
          ->names('admin.player-team');
 
 });

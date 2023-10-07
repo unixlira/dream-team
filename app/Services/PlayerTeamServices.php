@@ -25,11 +25,6 @@ class PlayerTeamServices
         return view('web.player-team.index', compact('playersTeamsResource'));
     }
 
-    public function create()
-    {
-        return view('web.team.create');
-    }
-
     public function store($request)
     {
         try {
@@ -52,42 +47,13 @@ class PlayerTeamServices
 
     public function show($publicId)
     {
-        $team = PlayerTeam::where('public_id', $publicId)
-                    ->first();
+        $playersTeams = PlayerTeam::with('team.players')
+                                  ->where('public_id', $publicId)
+                                  ->first();
 
-        $team = TeamResource::make($team);
+        $playersTeamsResource = PlayerResource::make($playersTeams);
 
-        return view('web.team.show', compact('team'));
-    }
-
-    public function edit($publicId)
-    {
-        $team = PlayerTeam::where('public_id', $publicId)
-                    ->first();
-
-        $team = TeamResource::make($team);
-
-        return view('web.team.edit', compact('team'));
-    }
-
-    public function update($request, $publicId)
-    {
-        try {
-            $data = $request->all();
-
-            $team = PlayerTeam::where('public_id', $publicId)
-                        ->first();
-
-            $team->update($data);
-
-            session()->flash('success', 'Time atualizado com sucesso');
-
-
-            return redirect()->route('admin.team.index');
-        } catch (\Exception $e) {
-            Log::error('Erro ao atualizar time: '.$e->getMessage());
-            return response()->json(['message' => 'Erro ao atualizar time: ' . $e->getMessage()], 500);
-        }
+        return view('web.player-team.show', compact('playersTeamsResource'));
     }
 
     public function destroy($publicId)

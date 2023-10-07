@@ -37,16 +37,6 @@
                                 <span class="align-middle"><b>Sortear Jogadores </b></span>
                             </a>
                         </div>
-                        <div class="col-sm-4">
-                            <nav class="navbar navbar-light bg-light">
-                                <form class="form-inline" method="GET" action="{{ url()->current() }}">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" name="search">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                                        <i class="material-icons align-middle">&#xE8B6;</i>
-                                    </button>
-                                </form>
-                            </nav>
-                        </div>
                     </div>
                 </div>
                 <table class="table table-striped table-hover table-bordered">
@@ -94,12 +84,6 @@
                                 </ul>
                             </td>
                             <td>
-                                <a href="{{ route('admin.player-team.show', ['player_team' => $playersTeams->public_id]) }}" class="view" title="View" data-toggle="tooltip" onclick="showLoader()">
-                                    <i class="material-icons">&#xE417;</i>
-                                </a>
-                                <a href="{{ route('admin.player-team.edit', ['player_team' => $playersTeams->public_id]) }}" class="edit" title="Edit" data-toggle="tooltip" onclick="showLoader()">
-                                    <i class="material-icons">&#xE254;</i>
-                                </a>
                                 <a href="" class="delete" title="Delete" data-toggle="tooltip" data-id="{{ $playersTeams->public_id }}">
                                     <i class="material-icons">&#xE872;</i>
                                 </a>
