@@ -5,7 +5,9 @@
 
 ## Descrição
 
-Este é um componente em um sistema de gerenciamento de times e jogadores. A função "shuffle" desempenha um papel importante na organização dos jogadores em times de forma justa e equilibrada. Abaixo, explicaremos o que esta função faz, passo a passo, sem usar termos técnicos:
+Essa é uma aplicação de gerenciamento de times e jogadores. 
+Foi desenvolvida uma função inteligente "shuffle" que desempenha um papel importante na organização dos jogadores em times de forma justa e equilibrada. 
+Abaixo, explicaremos o que esta função faz, passo a passo.
 
 ## Como Funciona
 
