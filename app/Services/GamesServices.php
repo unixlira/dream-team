@@ -11,11 +11,12 @@ class GamesServices
 {
     public function index()
     {
-        $games = Game::all();
+        $games = Game::with('teamA.players', 'teamB.players')
+                     ->get();
 
-        $games = GameResource::collection($games);
+        $gamesResource = GameResource::collection($games);
 
-        return view('web.game.index', compact('games'));
+        return view('web.game.index', compact('gamesResource'));
     }
 
     public function create()
@@ -24,8 +25,8 @@ class GamesServices
 
             $teams = Team::all();
 
-            if($teams){
-                session()->flash('error', 'Necessário criar os times primeiro');
+            if($teams->count() < 2){
+                session()->flash('error', 'Necessário 2 times para gerar partida');
 
                 return redirect()->route('admin.game.index');
             }

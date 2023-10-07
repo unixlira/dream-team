@@ -9,7 +9,6 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\PlayerTeamController;
-use App\Http\Controllers\GenerateAllController;
 
 Route::get('/', function () {
     return view('index');
@@ -34,11 +33,6 @@ Route::prefix('admin')->group(function(){
     Route::resource('player-team',PlayerTeamController::class)
          ->names('admin.player-team');
 
-});
-
-Route::prefix('generate')->group(function(){
-    Route::get('all',[GenerateAllController::class, 'generate'])
-         ->name('generate.all');
 });
 
 Route::get('/creator/player/{qtd}', function (Request $request) {

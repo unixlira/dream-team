@@ -14,7 +14,7 @@
             <form method="POST" action="{{ route('admin.team.store') }}">
                 @csrf
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-12">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nome </label>
                             <input type="text" class="form-control" id="name" name="name">

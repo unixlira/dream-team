@@ -7,7 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PlayerResource extends JsonResource
 {
-
     public function toArray($request): array|\JsonSerializable|Arrayable
     {
         return [

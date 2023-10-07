@@ -31,17 +31,17 @@
                     </div>
                     <div class="col-md-3 col-sm-12 mb-3">
                         <a href="{{ route('admin.player-team.index') }}" class="btn btn-dark w-100"
-                           onclick="showLoader()">Jogadores&Times</a>
+                           onclick="showLoader()">Jogadores e Times</a>
                     </div>
                     <div class="col-md-3 col-sm-12 mb-3">
-                        <a href="{{ route('admin.player-team.index') }}" class="btn btn-dark w-100"
-                           onclick="showLoader()">Gerar partidas dos Times</a>
+                        <a href="{{ route('admin.game.index') }}" class="btn btn-dark w-100"
+                           onclick="showLoader()">Gerar Partidas dos Times</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="text-center">
-            <span class="fw-bold text-secondary">OU</span>
+            <span class="fw-bold text-dark">OU</span>
         </div>
         <div class="row justify-content-start">
             <div class="text-left">
@@ -74,19 +74,11 @@
                     </div>
                     <div class="col-md-3 col-sm-12 mb-3">
                         <a href="{{ route('admin.player-team.shuffle') }}" class="btn btn-dark w-100"
-                           onclick="showLoader()">Gerar Jogadores&Times</a>
+                           onclick="showLoader()">Gerar Jogadores e Times</a>
                     </div>
                     <div class="col-md-3 col-sm-12 mb-3">
                         <a href="{{ route('admin.game.create') }}" class="btn btn-dark w-100" onclick="showLoader()">
                             Gerar Partidas
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 mb-3">
-                        <a href="{{route('generate.all')}}" class="btn btn-dark btn-block  w-100" id="generate-all"
-                           onclick="showLoader()">
-                            Gerar Tudo
                         </a>
                     </div>
                 </div>

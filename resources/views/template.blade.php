@@ -16,43 +16,35 @@
         <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     </head>
     <body>
-        <nav class="navbar fixed-top bg-dark">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand text-white" href="/">
                     <img src="https://www.codeitsolution.com/images/logo-mobile.png" alt="" width="170px">
                 </a>
-                @if(request()->routeIs('admin.*'))
-                    <div class="d-flex justify-content-between">
-                        <ul class="navbar-nav mx-2">
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-outline-secondary p-2 " href="/">Início</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav mx-2">
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-outline-secondary p-2" href="{{ route('admin.team.index') }}">Times</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav mx-2">
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-outline-secondary p-2" href="{{ route('admin.player.index') }}">Jogadores</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav mx-2">
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-outline-secondary p-2" href="{{ route('admin.player-team.index') }}">Jogadores&Times</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav mx-2">
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-outline-secondary p-2" href="{{ route('admin.game.index') }}">Partidas</a>
-                            </li>
-                        </ul>
-                    </div>
-                @endif
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary p-2 btn-sm m-1 @if(request()->routeIs('admin.*')) nav-link-custom @endif" href="/">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary p-2 btn-sm  m-1 @if(request()->routeIs('admin.*')) nav-link-custom @endif" href="{{ route('admin.team.index') }}">Times</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary p-2 btn-sm m-1 @if(request()->routeIs('admin.*')) nav-link-custom @endif" href="{{ route('admin.player.index') }}">Jogadores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary p-2 btn-sm m-1 @if(request()->routeIs('admin.*')) nav-link-custom @endif" href="{{ route('admin.player-team.index') }}">Jogadores e Times</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary p-2 btn-sm m-1 @if(request()->routeIs('admin.*')) nav-link-custom @endif" href="{{ route('admin.game.index') }}">Partidas</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
-
         <div class="container mt-5">
             <div id="loader" class="loader-container" style="display: none">
                 <div class="loader"></div>

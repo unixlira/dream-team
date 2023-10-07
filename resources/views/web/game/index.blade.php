@@ -21,7 +21,7 @@
         @endif
     </div>
 
-    <div class="container-xl">
+    <div class="container-xl mb-5">
         <div class="row justify-content-start">
             <p>
             <h2>Partidas <b>Detalhes</b></h2>
@@ -38,50 +38,76 @@
                             </a>
                         </div>
                     </div>
-                    @foreach($games as $game)
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="text-center">Partida Nº 01 <br> Dia 22 das 19h - 21h</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="container">
-                                    <div class="row justify-content-center"> <!-- Centralize a linha -->
-                                        <div class="col">
-                                            <div class="card mx-auto" style="width: 18rem;">
-                                                <div class="text-center"> <!-- Centralize a imagem horizontalmente -->
-                                                    <img class="card-img-top w-25 p-1" src="{{ asset('/foot.png') }}" alt="Time de Fora">
+                    @if($gamesResource->count() > 1)
+                        @foreach($gamesResource as $game)
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="text-center">
+                                        <span class="text-success">Partida Nº {{ $game->id }}</span> <br>
+                                        Data {{ $game->game_at->format('d-m-Y') }} as {{ $game->game_at->format('H:i') }}
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            @if($game->teamA)
+                                                <div class="col">
+                                                    <div class="card mx-auto" style="width: 20rem;">
+                                                        <div class="text-center">
+                                                            <img class="card-img-top w-25 p-1" src="{{ asset('/foot.png') }}" alt="Time de Fora">
+                                                            <h5>{{ $game->teamA->name }}</h5>
+                                                        </div>
+                                                        <ul class="list-group list-group-flush">
+                                                            @foreach($game->teamA->players as $playersA)
+                                                                <li class="list-group-item d-flex justify-content-between">
+                                                                    <span class="text-left fw-semibold">{{ $playersA?->player->name }}</span>
+                                                                    <span class="fw-semibold {{ $playersA?->player->is_goalkeeper ? 'text-success' : 'text-info' }}">
+                                                                        {{ $playersA?->player->is_goalkeeper ? 'Goleiro' : 'Jogador' }}
+                                                                    </span>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Cras justo odio</li>
-                                                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                                                    <li class="list-group-item">Vestibulum at eros</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col text-center mt-5">
-                                            <span style="font-size: xxx-large">X</span>
-                                        </div>
-                                        <div class="col">
-                                            <div class="card mx-auto" style="width: 18rem;">
-                                                <div class="text-center"> <!-- Centralize a imagem horizontalmente -->
-                                                    <img class="card-img-top w-25 p-1" src="{{ asset('/foot2.png') }}" alt="Time de Fora">
+                                            @endif
+                                                <div class="col text-center mt-5">
+                                                    <span style="font-size: xxx-large">X</span>
                                                 </div>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">Cras justo odio</li>
-                                                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                                                    <li class="list-group-item">Vestibulum at eros</li>
-                                                </ul>
-                                            </div>
+                                            @if($game->teamA)
+                                                <div class="col">
+                                                    <div class="card mx-auto" style="width: 20rem;">
+                                                        <div class="text-center">
+                                                            <img class="card-img-top w-25 p-1" src="{{ asset('/foot2.png') }}" alt="Time de Fora">
+                                                            <h5>{{ $game->teamB->name }}</h5>
+                                                        </div>
+                                                        <ul class="list-group list-group-flush">
+                                                            @foreach($game->teamB->players as $playersB)
+                                                                <li class="list-group-item d-flex justify-content-between">
+                                                                    <span class="text-left fw-semibold">{{ $playersB?->player->name }}</span>
+                                                                    <span class="fw-semibold {{ $playersB?->player->is_goalkeeper ? 'text-success' : 'text-info' }}">
+                                                                        {{ $playersB?->player->is_goalkeeper ? 'Goleiro' : 'Jogador' }}
+                                                                    </span>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-flex justify-content-center">
+                                <hr class="bg-dark rounded bg-dark w-50 mb-4 mt-4" style="height: 10px;">
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="d-flex justify-content-center">
+                            <h1 class="text-dark">Nenhuma partida agendada</h1>
                         </div>
-                    @endforeach
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
-    <br>
 @endsection
