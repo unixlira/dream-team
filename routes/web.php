@@ -26,8 +26,7 @@ Route::prefix('admin')->group(function(){
          ->only(
              [
                  'index',
-                 'create',
-                 'destroy'
+                 'create'
              ]
          )->names('admin.game');
     Route::resource('player-team',PlayerTeamController::class)

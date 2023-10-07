@@ -21,9 +21,4 @@ class GameController extends Controller
     {
         return $this->gameServices->create();
     }
-
-    public function destroy($publicId)
-    {
-        return $this->gameServices->destroy($publicId);
-    }
 }

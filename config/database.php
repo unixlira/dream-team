@@ -93,6 +93,19 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'testing' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_TESTING', '127.0.0.1'),
+            'port' => env('DB_PORT_TESTING', '3306'),
+            'database' => env('DB_DATABASE_TESTING', 'myapp_testing'),
+            'username' => env('DB_USERNAME_TESTING', 'root'),
+            'password' => env('DB_PASSWORD_TESTING', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+        ],
     ],
 
     /*

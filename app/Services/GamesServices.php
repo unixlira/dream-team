@@ -57,22 +57,4 @@ class GamesServices
             return response()->json(['message' => 'Erro ao criar Partidas: ' . $e->getMessage()], 500);
         }
     }
-
-    public function destroy($publicId)
-    {
-        try {
-
-            $games = Game::where('public_id', $publicId)
-                          ->first();
-
-            $games->delete();
-
-            session()->flash('error', 'Partida excluido com sucesso');
-
-
-            return redirect()->route('admin.game.index');
-        } catch (\Exception $e) {
-            Log::error('Erro ao excluir Partida: '.$e->getMessage());
-            return response()->json(['message' => 'Erro ao excluir Partida: ' . $e->getMessage()], 500);
-        }    }
 }
