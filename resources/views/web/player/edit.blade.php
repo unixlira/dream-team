@@ -20,7 +20,7 @@
                         </div>
                         <div class="mb-3 mt-5">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_presence" name="player_presence" value="1" @if($player->is_presence) checked @endif>
+                                <input class="form-check-input" type="checkbox" id="is_presence" name="is_presence" value="1" @if($player->is_presence) checked @endif>
                                 <label class="form-check-label" for="is_presence">
                                     Confirmar presença do jogador
                                 </label>

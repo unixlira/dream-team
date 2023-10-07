@@ -3,6 +3,7 @@
 use App\Models\Player;
 use App\Models\PlayerTeam;
 use App\Models\Team;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\GameController;
@@ -23,7 +24,13 @@ Route::prefix('admin')->group(function(){
     Route::resource('team',TeamController::class)
          ->names('admin.team');
     Route::resource('game',GameController::class)
-         ->names('admin.game');
+         ->only(
+             [
+                 'index',
+                 'create',
+                 'destroy'
+             ]
+         )->names('admin.game');
     Route::resource('player-team',PlayerTeamController::class)
          ->names('admin.player-team');
 
@@ -34,24 +41,25 @@ Route::prefix('generate')->group(function(){
          ->name('generate.all');
 });
 
-Route::get('/pc', function () {
+Route::get('/creator/player/{qtd}', function (Request $request) {
 
-    $players = Player::factory(25)->create();
+    Player::factory($request->qtd)
+          ->create();
 
-    return response()->json([
-        'status' => 'success',
-        'data'   =>  $players
-    ]);
+    session()->flash('success', 'Jogadores prontos para o Jogo!');
+
+    return redirect()->route('admin.player.index');
 });
 
-Route::get('/tc', function () {
+Route::get('/creator/team/{qtd}', function (Request $request) {
 
-    $teams = Team::factory(10)->create();
+    Team::factory($request->qtd)
+        ->create();
 
-    return response()->json([
-        'status' => 'success',
-        'data'   =>  $teams
-    ]);
+    session()->flash('success', 'Times cadastrados!');
+
+    return redirect()->route('admin.team.index');
+
 });
 
 Route::get('/rpt', function () {

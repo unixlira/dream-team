@@ -22,7 +22,7 @@
                     <div class="col">
                         <div class="mb-3">
                             <label for="max_players" class="form-label">Número de Jogadores </label>
-                            <input type="number" class="form-control" id="max_players" name="max_players" min="1" max="6">
+                            <input type="number" class="form-control" id="max_players" name="max_players" min="1" max="6" value="{{ $team->max_players }}">
                             <div id="max_players" class="form-text">Insira o máx. de jogadores para esse time de 1 a 6</div>
                         </div>
                     </div>

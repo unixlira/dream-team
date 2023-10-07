@@ -40,7 +40,12 @@
                         </ul>
                         <ul class="navbar-nav mx-2">
                             <li class="nav-item">
-                                <a class="nav-link btn btn-outline-secondary p-2" href="{{ route('admin.player-team.index') }}">Times com Jogadores</a>
+                                <a class="nav-link btn btn-outline-secondary p-2" href="{{ route('admin.player-team.index') }}">Jogadores&Times</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mx-2">
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-secondary p-2" href="{{ route('admin.game.index') }}">Partidas</a>
                             </li>
                         </ul>
                     </div>
@@ -75,6 +80,40 @@
             function showLoader() {
                 $('#loader').show();
             }
+
+            function hideLoader() {
+                $('#loader').hide();
+            }
+
+            $(".btn-salvar").on('click', function () {
+
+                let qtdTeam   = $("#qtdTeam").val();
+                let qtdPlayer = $("#qtdPlayer").val();
+                let type      = $(this).data('type');
+                let qtd       = qtdTeam > 0 ? qtdTeam : qtdPlayer;
+
+                if (qtd > 0) {
+                    let url = `${window.location.origin}/creator/${type}/${qtd}`;
+
+                    showLoader();
+
+                    $.ajax({
+                        url: url,
+                        method: 'GET',
+                        success: function (data) {
+                            window.location.href = `${window.location.origin}/admin/${type}`;
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        },
+                        complete: function () {
+                            hideLoader();
+                        }
+                    });
+                } else {
+                    alert("A quantidade deve ser maior que 0.");
+                }
+            });
         </script>
     </body>
 </html>

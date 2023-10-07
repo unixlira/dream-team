@@ -113,113 +113,105 @@ class PlayerTeamServices
     {
         PlayerTeam::truncate();
 
-        $teams   = Team::all();
-        $players = Player::where('is_presence', true)
-                         ->get();
+        $teams = Team::all();
 
-        $numberOfPlayersPerTeam = $teams->first()->max_players;
-
-        $totalConfirmedPlayers = $players->count();
-
-        if ($totalConfirmedPlayers < ($numberOfPlayersPerTeam * 2)) {
+        if (count($teams) < 2) {
             return redirect()->route('admin.player-team.index')
-                             ->with('error', 'Não é possível realizar o sorteio. O número de jogadores confirmados é insuficiente.');
+                ->with('error', 'Não é possível realizar o sorteio. Cadastre pelo menos 2 times.');
         }
 
-        $assignedPlayers = [];
+        // Obter o número total de jogadores confirmados
+        $totalConfirmedPlayers = Player::where('is_presence', true)->count();
 
+        // Obter todos os jogadores confirmados
+        $confirmedPlayers = Player::where('is_presence', true)->get();
+
+        // Embaralhar aleatoriamente os jogadores
+        $shuffledPlayers = $confirmedPlayers->shuffle();
+
+        // Inicialize um array para rastrear quantos goleiros já foram alocados em cada time
+        $goalkeeperAssigned = [];
+
+        // Distribuir os jogadores nos times
         foreach ($teams as $team) {
             $numberOfPlayersPerTeam = $team->max_players;
-            $goalkeeperAssigned = false;
 
-            $availablePlayers = $players->filter(function ($player) use ($team, $assignedPlayers, &$goalkeeperAssigned) {
+            // Verificar se há jogadores suficientes para realizar o sorteio em pelo menos dois times
+            if ($totalConfirmedPlayers < ($numberOfPlayersPerTeam * 2)) {
+                return redirect()->route('admin.player-team.index')
+                    ->with('error', 'Não é possível realizar o sorteio. O número de jogadores confirmados é insuficiente.');
+            }
 
-                $isGoalkeeper = $player->is_goalkeeper;
+            $selectedPlayers = collect([]);
 
-                if ($isGoalkeeper && $goalkeeperAssigned) {
-                    return false;
+            // Garantir que cada time tenha apenas um goleiro
+            if (!in_array($team->id, $goalkeeperAssigned)) {
+                $selectedGoleiro = $shuffledPlayers->where('is_goalkeeper', true)->first();
+                if ($selectedGoleiro) {
+                    $selectedPlayers->push($selectedGoleiro);
+                    $goalkeeperAssigned[] = $team->id;
                 }
+            }
 
-                if ($isGoalkeeper) {
-                    $goalkeeperAssigned = true;
-                }
-
-                if (Arr::exists($assignedPlayers, $player->id)) {
-                    return false;
-                }
-
-                return !$isGoalkeeper || $team->players->where('is_goalkeeper', true)->count() < 1;
-            })->sortBy('skill_level');
-
-            $shuffledPlayers = $availablePlayers->shuffle();
-
-            $selectedPlayers = $shuffledPlayers->take($numberOfPlayersPerTeam);
+            $remainingPlayersCount = $numberOfPlayersPerTeam - $selectedPlayers->count();
+            $remainingPlayers = $shuffledPlayers->where('is_goalkeeper', false)->take($remainingPlayersCount);
+            $selectedPlayers = $selectedPlayers->concat($remainingPlayers);
 
             foreach ($selectedPlayers as $player) {
                 PlayerTeam::create([
                     'player_id' => $player->id,
                     'team_id'   => $team->id,
                 ]);
-
-                $assignedPlayers[] = $player->id;
             }
 
-            $players = $players->reject(function ($player) use ($assignedPlayers) {
-                return in_array($player->id, $assignedPlayers);
-            });
+            // Remover os jogadores selecionados
+            $shuffledPlayers = $shuffledPlayers->diff($selectedPlayers);
         }
 
-        $teamsWithoutGoalkeeper = $teams->filter(function ($team) {
-            return $team->players->where('is_goalkeeper', true)->count() < 1;
-        });
+        // Criar times reservas se ainda houver jogadores não alocados
+        $remainingPlayersCount = $shuffledPlayers->count();
 
-        foreach ($teamsWithoutGoalkeeper as $team) {
+        while ($remainingPlayersCount > 0) {
+            $playersPerReserveTeam = min($remainingPlayersCount, 6); // Máximo de 6 jogadores por time reserva
 
-            $availableGoalkeepers = $players->filter(function ($player) use ($assignedPlayers) {
-                return !$player->is_goalkeeper && !in_array($player->id, $assignedPlayers);
-            });
-
-            if (!$availableGoalkeepers->isEmpty()) {
-
-                $goalkeeper = $availableGoalkeepers->first();
-                PlayerTeam::create([
-                    'player_id' => $goalkeeper->id,
-                    'team_id'   => $team->id,
-                ]);
-
-                $assignedPlayers[] = $goalkeeper->id;
-            }
-        }
-
-        $teamNameSuffix = 1;
-        while (!$players->isEmpty()) {
-            $remainingPlayers = $players->splice(0, $numberOfPlayersPerTeam);
-
-            $newTeamName = 'Time dos Remanescentes ' . $teamNameSuffix;
-
-            while (Team::where('name', $newTeamName)->exists()) {
-                $teamNameSuffix++;
-                $newTeamName = 'Time dos Remanescentes ' . $teamNameSuffix;
-            }
-
-            $lastTeam = Team::create([
-                'name' => $newTeamName,
-                'max_players' => $numberOfPlayersPerTeam,
+            $reserveTeam = Team::create([
+                'name' => 'Time Reserva ' . (count($teams) + 1),
+                'max_players' => $playersPerReserveTeam,
             ]);
 
-            foreach ($remainingPlayers as $player) {
+            // Adicionar um goleiro ao time reserva se ainda houver goleiros não alocados
+            if ($shuffledPlayers->where('is_goalkeeper', true)->count() > 0) {
+                $selectedGoleiro = $shuffledPlayers->where('is_goalkeeper', true)->first();
                 PlayerTeam::create([
-                    'player_id' => $player->id,
-                    'team_id'   => $lastTeam->id,
+                    'player_id' => $selectedGoleiro->id,
+                    'team_id' => $reserveTeam->id,
                 ]);
-
-                $assignedPlayers[] = $player->id;
+                $shuffledPlayers = $shuffledPlayers->diff([$selectedGoleiro]);
             }
 
-            $teamNameSuffix++;
+            $selectedReservePlayers = $shuffledPlayers->take($playersPerReserveTeam);
+            $shuffledPlayers = $shuffledPlayers->diff($selectedReservePlayers);
+
+            foreach ($selectedReservePlayers as $player) {
+                PlayerTeam::create([
+                    'player_id' => $player->id,
+                    'team_id' => $reserveTeam->id,
+                ]);
+            }
+
+            $remainingPlayersCount = $shuffledPlayers->count();
         }
 
         return redirect()->route('admin.player-team.index');
     }
+
+
+
+
+
+
+
+
+
 
 }

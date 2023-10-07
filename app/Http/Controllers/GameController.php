@@ -12,34 +12,14 @@ class GameController extends Controller
         public GamesServices $gameServices
     ){}
 
-    public function index(Request $request)
+    public function index()
     {
-        return $this->gameServices->index($request);
+        return $this->gameServices->index();
     }
 
     public function create()
     {
         return $this->gameServices->create();
-    }
-
-    public function store(GameRequest $request)
-    {
-        return $this->gameServices->store($request);
-    }
-
-    public function show($publicId)
-    {
-        return $this->gameServices->show($publicId);
-    }
-
-    public function edit($publicId)
-    {
-        return $this->gameServices->edit($publicId);
-    }
-
-    public function update(GameRequest $request, $publicId)
-    {
-        return $this->gameServices->update($request, $publicId);
     }
 
     public function destroy($publicId)
