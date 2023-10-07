@@ -1,0 +1,46 @@
+version: "3.7"
+
+services:
+  # php 8.0
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+
+  # nginx
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - laravel
+
+  # db mysql
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: 'dream_team'
+      MYSQL_ROOT_PASSWORD: 'secret'
+      MYSQL_PASSWORD: 'secret'
+      MYSQL_USER: 'unixlira'
+    volumes:
+      - ./docker/mysql/dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - laravel
+
+
+networks:
+  laravel:
+    driver: bridge
