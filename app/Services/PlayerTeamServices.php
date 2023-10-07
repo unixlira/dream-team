@@ -115,7 +115,7 @@ class PlayerTeamServices
 
         $teams = Team::all();
 
-        if (count($teams) < 2) {
+        if ($teams->count() < 2) {
             return redirect()->route('admin.player-team.index')
                 ->with('error', 'Não é possível realizar o sorteio. Cadastre pelo menos 2 times.');
         }
