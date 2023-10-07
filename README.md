@@ -5,7 +5,9 @@
 
 ## Descrição
 
-Este é um componente em um sistema de gerenciamento de times e jogadores. A função "shuffle" desempenha um papel importante na organização dos jogadores em times de forma justa e equilibrada. Abaixo, explicaremos o que esta função faz, passo a passo, sem usar termos técnicos:
+Essa é uma aplicação de gerenciamento de times e jogadores. 
+Foi desenvolvida uma função inteligente "shuffle" que desempenha um papel importante na organização dos jogadores em times de forma justa e equilibrada. 
+Abaixo, explicaremos o que esta função faz, passo a passo.
 
 ## Como Funciona
 
@@ -37,10 +39,12 @@ Este é um componente em um sistema de gerenciamento de times e jogadores. A fun
 
 ## Como Usar
 
-Para utilizar esta função, você pode acessá-la através da interface do sistema. Normalmente, você encontrará um botão ou link que diz "Organizar Times" ou algo similar. Depois de clicar nele, o sistema executará automaticamente a função "shuffle" para você.
+Para utilizar esta função, você pode acessá-la através da interface do sistema. Normalmente, você encontrará um botão ou link que diz "Sortear Jogadores" no link Times e Jogadores. Depois de clicar nele, o sistema executará automaticamente a função "shuffle" para você.
 
 Lembre-se de que esta função é projetada para tornar a distribuição de jogadores em times o mais justa possível, seguindo regras específicas. Portanto, não se preocupe com os detalhes técnicos; basta usar e desfrutar!
 
+
+# Stacks utilizadas e Acesso ao link de produção
 Sistema disponível em ambiente AWS utilizando serviços:
 
 - Route 53
@@ -49,7 +53,7 @@ Sistema disponível em ambiente AWS utilizando serviços:
 
 Disponível em 
 
-http://www.devlira.com.br
+<a href="http://www.devlira.com.br">devlira.com.br</a>
 
 ---
 
