@@ -78,7 +78,7 @@ Antes de começar, certifique-se de ter os seguintes pré-requisitos instalados 
 3. Execute o seguinte comando para clonar o repositório do GitHub:
 
    ```shell
-   git clone https://github.com/nome-do-usuario/nome-do-repositorio.git
+   git clone git@github.com:unixlira/dream-team.git
 
 ## Passo 2: Entre no Diretório do Projeto
 
