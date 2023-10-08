@@ -86,6 +86,12 @@ class PlayerTeamServices
                 ->with('error', 'Não é possível realizar o sorteio. Cadastre pelo menos 2 times.');
         }
 
+        foreach ($teams as $team) {
+            if (str_contains($team->name, 'Team Reserva')) {
+                $team->delete();
+            }
+        }
+
         $confirmedPlayers = Player::where('is_presence', true)
                                   ->orderBy('skill_level', 'desc')
                                   ->get();
@@ -132,15 +138,15 @@ class PlayerTeamServices
             $playersPerReserveTeam = min($remainingPlayersCount, 6); // Máximo de 6 jogadores por time reserva
 
             $reserveTeam = Team::create([
-                'name' => 'Time Reserva ' . (count($teams) + 1),
                 'max_players' => $playersPerReserveTeam,
+                'name'        => 'Time Reserva ' . (count($teams) + 1)
             ]);
 
             if ($shuffledPlayers->where('is_goalkeeper', true)->count() > 0) {
                 $selectedGoalkeeper = $shuffledPlayers->where('is_goalkeeper', true)->first();
                 PlayerTeam::create([
                     'player_id' => $selectedGoalkeeper->id,
-                    'team_id' => $reserveTeam->id,
+                    'team_id'   => $reserveTeam->id,
                 ]);
                 $shuffledPlayers = $shuffledPlayers->diff([$selectedGoalkeeper]);
             }
@@ -151,7 +157,7 @@ class PlayerTeamServices
             foreach ($selectedReservePlayers as $player) {
                 PlayerTeam::create([
                     'player_id' => $player->id,
-                    'team_id' => $reserveTeam->id,
+                    'team_id'   => $reserveTeam->id,
                 ]);
             }
 

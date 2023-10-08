@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Game;
 use App\Models\PlayerTeam;
 use App\Models\Team;
 use Illuminate\Support\Facades\Log;
@@ -106,6 +107,10 @@ class TeamServices
 
             PlayerTeam::where('team_id', $team->id)
                       ->delete();
+
+            Game::where('team_a_id', $team->id)
+                ->orWhere('team_b_id', $team->id)
+                ->delete();
 
             $team->delete();
 

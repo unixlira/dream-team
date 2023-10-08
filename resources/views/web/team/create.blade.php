@@ -14,14 +14,14 @@
             <form method="POST" action="{{ route('admin.team.store') }}">
                 @csrf
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6 cols-sm-12">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nome </label>
                             <input type="text" class="form-control" id="name" name="name">
                             <div id="name" class="form-text">Insira o nome do time</div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-6 cols-sm-12">
                         <div class="mb-3">
                             <label for="max_players" class="form-label">Número de Jogadores </label>
                             <input type="number" class="form-control" id="max_players" name="max_players" min="1" max="6">

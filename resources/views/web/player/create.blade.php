@@ -14,29 +14,21 @@
             <form method="POST" action="{{ route('admin.player.store') }}">
                 @csrf
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-4 cols-sm-12">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nome Completo</label>
                             <input type="text" class="form-control" id="name" name="name">
                             <div id="name" class="form-text">Insira nome ou apelido do jogador</div>
                         </div>
-                        <div class="mb-3 mt-5">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_presence" name="is_presence" value="1">
-                                <label class="form-check-label" for="is_presence">
-                                    Confirmar presença do jogador
-                                </label>
-                            </div>
-                        </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4 cols-sm-12">
                         <div class="mb-3">
                             <label for="skill_level" class="form-label">Nível de Habilidade</label>
                             <input type="number" class="form-control" id="skill_level" name="skill_level" max="5" min="1">
                             <div id="skill_level" class="form-text">Insira um valor de 1 até 5</div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4 cols-sm-12">
                         <div class="mb-3">
                             <label for="is_goalkeeper" class="form-label">Goleiro</label>
                             <select class="form-select" aria-label="É goleiro" name="is_goalkeeper">
@@ -45,6 +37,16 @@
                                 <option value="0">Não</option>
                             </select>
                             <div id="is_goalkeeper" class="form-text">O jogador vai ser goleiro?</div>
+                        </div>
+                    </div>
+                    <div class="ol-md-4 cols-sm-12">
+                        <div class="mb-3 mt-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="is_presence" name="is_presence" value="1">
+                                <label class="form-check-label" for="is_presence">
+                                    Confirmar presença do jogador
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>

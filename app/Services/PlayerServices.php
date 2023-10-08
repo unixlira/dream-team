@@ -17,6 +17,7 @@ class PlayerServices
         $players = Player::when($search, function ($q) use ($search) {
                              $q->where('name', 'like', '%' . $search . '%');
                            })
+                         ->orderByDesc('id')
                          ->paginate(4);
 
         $players->appends(['search' => $search]);
