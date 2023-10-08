@@ -36,14 +36,13 @@ services:
       MYSQL_DATABASE: 'dream_team'
       MYSQL_ROOT_PASSWORD: 'secret'
       MYSQL_PASSWORD: 'secret'
-      MYSQL_USER: 'unixlira'
+      MYSQL_USER: 'root'
     volumes:
       - ./docker/mysql/dbdata:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
       - laravel
-    command: --init-file /docker-entrypoint-initdb.d/init.sql
 
 networks:
   laravel:
