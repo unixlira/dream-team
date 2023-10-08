@@ -38,7 +38,7 @@ services:
       MYSQL_USER: 'unixlira'
       MYSQL_PASSWORD: 'secret'
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+      - ./docker/mysql/dbdata:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
