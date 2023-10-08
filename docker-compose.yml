@@ -43,6 +43,7 @@ services:
       - "3306:3306"
     networks:
       - laravel
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
 
 networks:
   laravel:
