@@ -84,7 +84,7 @@
                                 </ul>
                             </td>
                             <td>
-                                <a href="" class="delete" title="Delete" data-toggle="tooltip" data-id="{{ $playersTeams->public_id }}">
+                                <a href="" class="delete" title="Delete" data-toggle="tooltip" data-id="{{ $playersTeams->team->public_id }}">
                                     <i class="material-icons">&#xE872;</i>
                                 </a>
                             </td>

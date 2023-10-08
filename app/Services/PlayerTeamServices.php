@@ -59,19 +59,22 @@ class PlayerTeamServices
     public function destroy($publicId)
     {
         try {
+            $team = Team::where('public_id', $publicId)
+                         ->first();
 
-            $team = PlayerTeam::where('public_id', $publicId)
-                        ->first();
+            $playersTeams = PlayerTeam::where('team_id', $team->id)
+                                      ->get();
 
-            $team->delete();
+            foreach ($playersTeams as $playersTeam){
+                $playersTeam->delete();
+            }
 
-            session()->flash('error', 'Time excluido com sucesso');
-
+            session()->flash('error', 'Players Team excluído com sucesso');
 
             return redirect()->route('admin.team.index');
         } catch (\Exception $e) {
-            Log::error('Erro ao excluir time: '.$e->getMessage());
-            return response()->json(['message' => 'Erro ao excluir time: ' . $e->getMessage()], 500);
+            Log::error('Erro ao excluir PlayerTeam: '.$e->getMessage());
+            return response()->json(['message' => 'Erro ao excluir PlayerTeam: ' . $e->getMessage()], 500);
         }
     }
 

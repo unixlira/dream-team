@@ -2,19 +2,26 @@
 
 namespace App\Models;
 
+use App\Traits\GeneratesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PlayerTeam extends Model
 {
-    use HasFactory;
+    use HasFactory, GeneratesUuid;
 
     protected $fillable = [
         'public_id',
         'player_id',
         'team_id',
     ];
+
+    public static function boot(): void
+    {
+        parent::boot();
+        static::bootGeneratesUuid();
+    }
 
     public function player(): BelongsTo
     {
