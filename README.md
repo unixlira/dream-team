@@ -85,7 +85,7 @@ Antes de começar, certifique-se de ter os seguintes pré-requisitos instalados 
 1. Navegue para o diretório recém-clonado usando o seguinte comando:
 
    ```shell
-   cd nome-do-repositorio
+   cd dream-team
 
 ## Passo 3: Configuração do Docker
 
