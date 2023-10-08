@@ -52,4 +52,9 @@ class PlayerTeamController extends Controller
         return $this->playerTeamService->shuffle();
     }
 
+    public function reset()
+    {
+        return $this->playerTeamService->reset();
+    }
+
 }

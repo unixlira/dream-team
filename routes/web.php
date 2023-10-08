@@ -15,7 +15,9 @@ Route::get('/', function () {
 });
 
 Route::get('/admin/player-team/shuffle',[PlayerTeamController::class, 'shuffle'])
-    ->name('admin.player-team.shuffle');
+     ->name('admin.player-team.shuffle');
+Route::get('/admin/player-team/reset',[PlayerTeamController::class, 'reset'])
+     ->name('admin.player-team.reset');
 
 Route::prefix('admin')->group(function(){
     Route::resource('player',PlayerController::class)

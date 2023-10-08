@@ -38,6 +38,7 @@
                     </div>
                     <div class="col-md-4 cols-sm-12">
                         <div class="mb-3 mt-2">
+                            <input type="hidden" name="is_presence" value="0">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="is_presence" name="is_presence" value="1" @if($player->is_presence) checked @endif>
                                 <label class="form-check-label" for="is_presence">

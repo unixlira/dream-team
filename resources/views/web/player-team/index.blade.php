@@ -31,12 +31,20 @@
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
-                        <div class="col-sm-8">
-                            <a href="{{ route('admin.player-team.shuffle') }}" class="btn btn-sm btn-primary mt-2" onclick="showLoader()">
+                        <div class="col-sm-9">
+                            <a href="{{ route('admin.player-team.shuffle') }}" class="btn btn-sm btn-primary mt-2 @if($playersTeamsResource[0]?->reset) disabled btn-danger @endif" onclick="showLoader()">
                                 <i class="material-icons align-middle">shuffle</i>
                                 <span class="align-middle"><b>Sortear Jogadores </b></span>
                             </a>
                         </div>
+                        @if( $playersTeamsResource[0]?->reset )
+                            <div class="col-sm-3 text-right">
+                                <a href="{{ route('admin.player-team.reset') }}" class="btn btn-sm btn-warning mt-2" onclick="showLoader()" data-toggle="tooltip" data-placement="top" title="Após atualizar jogador a 'Regra Observer' não permite continuar o sorteio sem reiniciar antes, clique para continuar o sorteio e Bom Jogo!">
+                                    <i class="material-icons align-middle">warning</i>
+                                    <span class="align-middle"><b>Necessário Reiniciar</b></span>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <table class="table table-striped table-hover table-bordered">

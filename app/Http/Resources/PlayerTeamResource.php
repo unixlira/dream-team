@@ -10,11 +10,12 @@ class PlayerTeamResource extends JsonResource
     public function toArray($request): array|\JsonSerializable|Arrayable
     {
         return [
-            'public_id'     => $this->public_id,
-            'created_at'    => $this->created_at,
-            'updated_at'    => $this->updated_at,
+            'public_id'  => $this->public_id,
+            'reset'      => $this->reset,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
 
-            'team'      => TeamResource::make($this->whenLoaded('team')),
+            'team'       => TeamResource::make($this->whenLoaded('team')),
         ];
     }
 }

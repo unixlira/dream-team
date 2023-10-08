@@ -15,6 +15,7 @@ class PlayerTeam extends Model
         'public_id',
         'player_id',
         'team_id',
+        'reset',
     ];
 
     public static function boot(): void

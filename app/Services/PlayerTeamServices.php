@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Resources\PlayerResource;
+use App\Http\Resources\PlayerTeamResource;
 use App\Models\Player;
 use App\Models\PlayerTeam;
 use App\Models\Team;
@@ -16,11 +17,11 @@ class PlayerTeamServices
     public function index()
     {
         $playersTeams = PlayerTeam::with('team.players')
-                                   ->select('team_id', DB::raw('count(id) as total_players'), DB::raw('max(public_id) as public_id'))
-                                   ->groupBy('team_id')
+                                   ->select('team_id', 'reset', DB::raw('count(id) as total_players'), DB::raw('max(public_id) as public_id'))
+                                   ->groupBy('team_id', 'reset')
                                    ->paginate(5);
 
-        $playersTeamsResource = PlayerResource::collection($playersTeams);
+        $playersTeamsResource = PlayerTeamResource::collection($playersTeams);
 
         return view('web.player-team.index', compact('playersTeamsResource'));
     }
@@ -51,7 +52,7 @@ class PlayerTeamServices
                                   ->where('public_id', $publicId)
                                   ->first();
 
-        $playersTeamsResource = PlayerResource::make($playersTeams);
+        $playersTeamsResource = PlayerTeamResource::make($playersTeams);
 
         return view('web.player-team.show', compact('playersTeamsResource'));
     }
@@ -170,4 +171,10 @@ class PlayerTeamServices
         return redirect()->route('admin.player-team.index');
     }
 
+    public function reset()
+    {
+        PlayerTeam::truncate();
+
+        return redirect()->route('admin.player-team.index');
+    }
 }

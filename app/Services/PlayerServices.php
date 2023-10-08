@@ -79,6 +79,7 @@ class PlayerServices
     public function update($request, $publicId)
     {
         try {
+
             $data = $request->all();
 
             $player = Player::where('public_id', $publicId)

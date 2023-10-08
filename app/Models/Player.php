@@ -15,8 +15,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $name
  * @property int    $skill_level
  * @property bool   $is_goalkeeper
+ * @property bool   $reset
  *
- * @property Presence $presence
  */
 class Player extends Model
 {
