@@ -37,9 +37,9 @@ services:
       MYSQL_DATABASE: 'dream_team'
       MYSQL_USER: 'unixlira'
       MYSQL_PASSWORD: 'secret'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
     volumes:
       - ./docker/mysql/dbdata:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "3306:3306"
     networks:
