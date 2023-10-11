@@ -112,7 +112,12 @@ class PlayerServices
 
             session()->flash('success', 'Jogador excluido com sucesso');
 
-            return redirect()->route('admin.player.index', [], Response::HTTP_FOUND);
+            return response()->json(
+                [
+                    'status'  => 'success',
+                    'message' => 'Jogador excluido com sucess.'
+                ],Response::HTTP_NO_CONTENT
+            );
         } catch (\Exception $e) {
             Log::error('Erro ao excluir jogador: '.$e->getMessage());
             session()->flash('error', 'Erro ao excluir jogador');
