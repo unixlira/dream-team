@@ -110,7 +110,7 @@ class PlayerServices
 
             $player->delete();
 
-            session()->flash('error', 'Jogador excluido com sucesso');
+            session()->flash('success', 'Jogador excluido com sucesso');
 
             return redirect()->route('admin.player.index', [], Response::HTTP_FOUND);
         } catch (\Exception $e) {
